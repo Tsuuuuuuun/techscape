@@ -1,8 +1,5 @@
 ---
-type: issue
-created: "{{date}}"
 aliases: []
-status: draft
 ---
 # How {{generalized technical problem}}?
 

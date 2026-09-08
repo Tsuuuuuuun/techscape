@@ -1,9 +1,6 @@
 ---
-type: technology
-created: 2026-09-08
 aliases:
   - Rust Request for Comments
-status: reviewed
 ---
 # Rust RFC
 

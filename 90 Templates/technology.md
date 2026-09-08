@@ -1,8 +1,5 @@
 ---
-type: technology
-created: "{{date}}"
 aliases: []
-status: draft
 ---
 # {{Named technology}}
 

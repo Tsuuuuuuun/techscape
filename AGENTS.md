@@ -31,7 +31,7 @@ Skills は運用の作業手順を担う。Concept はフラットに配置し�
 
 本文は日本語を基本とし、名称は標準的な表記を使う。Issue の H1 は英語の How ...? とし、ファイル名では末尾の ? を省く。例: `10 Issues/How should memory be managed.md`。他のファイル名でも `/ : * ? " < > | # %` を避ける。`#` はリンクのフラグメント区切り、`%` はパーセントエンコーディングと衝突し、Markdown リンクを壊す。Concept / Technology のファイル名は名称を基本にし、同名衝突時のみ対象を添える。
 
-Issue・Concept・Technology の知識ノートでは、最小メタデータを type と created（YYYY-MM-DD）とする。この規則は README.md、SKILL.md、Typst の Survey には適用しない。aliases は略称・別表記があるときだけ記入。status は draft / reviewed を使える。reviewed は今回のスコープで確認した意味であり、完全性を保証しない。reviewed のノートに未確認の説明・主張を追加した場合は draft に戻す。表記修正や、未理解を明示した Open questions の追記だけでは戻す必要はない。空欄の任意メタデータは削除する。
+frontmatter は最小限とし、aliases 以外の項目を置かない。aliases は略称・別表記があるときだけ記入し、なければ frontmatter ごと削除する。ノートの分類はフォルダ、資料を確認した時点は References の確認日、検証の状況は本文の区別と Open questions が担う。これらを frontmatter で二重に持たない。
 
 既存のファイル名・H1・aliases・本文を検索してから作成する。表記違いは aliases に統合する。重複の説明をコピーせず、正本へリンクする。ノート間のリンクは Markdown の `[表示名](相対パス.md)` 形式に統一する。パスはリンク元ファイルのあるフォルダを基準にし、拡張子 `.md` を含め、空白は `%20` にする。例として `30 Technologies/Rust.md` から `20 Concepts/Ownership.md` へは `[Ownership](../20%20Concepts/Ownership.md)` と書く。リンク先の実在と、相対パスが正しく解決されることを確認し、何を説明する／何に使われる関係かを短く添える。意味のない全相互リンクは不要。未作成の候補は通常のテキストで残し、空リンクや架空のリンクを作らない。改名・統合時は参照元も更新し、内容を失わない。
 

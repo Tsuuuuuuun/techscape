@@ -1,8 +1,5 @@
 ---
-type: concept
-created: "{{date}}"
 aliases: []
-status: draft
 ---
 # {{Noun phrase}}
 
