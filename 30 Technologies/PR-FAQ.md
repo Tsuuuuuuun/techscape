@@ -1,6 +1,5 @@
 ---
 aliases:
-  - Working Backwards
   - 6-Pager
   - Amazon PR/FAQ
 ---
@@ -8,25 +7,25 @@ aliases:
 
 ## Summary
 
-Amazon において、新製品や新機能の企画・意思決定を行う際に用いられる、顧客視点の模擬プレスリリース（Press Release）と質問回答集（FAQ）で構成された提案文書フォーマットおよび「Working Backwards（顧客からの逆算）」意思決定プロセス[^working-backwards]。
+Amazon において、新製品や新機能の企画・意思決定を行う際に用いられる、顧客視点の模擬プレスリリース（Press Release）と質問回答集（FAQ）で構成された提案文書フォーマットおよび会議運用手法[^vogels-2006][^working-backwards-book]。[Working Backwards](../20%20Concepts/Working%20Backwards.md) の原則を社内で具体化・制度化したもの。
 
 ## Motivation
 
-新規事業やプロダクト開発において、技術起点や社内都合で機能を作り始めると、完成した後に「誰も欲しがらない」「価値が伝わらない」という致命的な失敗に陥りやすい。また、スライド（PowerPoint）によるプレゼンテーションは要点を美辞麗句で誤魔化しやすく、厳密な思考や議論を阻害する。開発に着手する前に「完成した未来の顧客体験」を散文（ナラティブ）で明確に言語化し、徹底的に検証するための仕組みとして導入された[^working-backwards]。
+新規事業やプロダクト開発において、技術起点や社内都合で機能を作り始めると、完成した後に「誰も欲しがらない」「価値が伝わらない」という致命的な失敗に陥りやすい。また、スライド（PowerPoint）によるプレゼンテーションは要点を美辞麗句で誤魔化しやすく、厳密な思考や議論を阻害する。開発に着手する前に「完成した未来の顧客体験」を散文（ナラティブ）で明確に言語化し、徹底的に検証するための [Working Backwards](../20%20Concepts/Working%20Backwards.md) を実行する仕組みとして導入された[^vogels-2006][^working-backwards-book]。
 
 ## Goals and non-goals
 
 - **Goals**:
-  - 顧客が本当に抱えている課題と、新機能がもたらす具体的便益を開発前に証明する[^working-backwards]。
-  - 曖昧さを許さない散文形式（ナラティブ）で論理の穴や非現実的な前提を炙り出す[^working-backwards]。
-  - 会議の冒頭20〜30分を全員で黙読（沈黙の読書）に費やし、プレゼンスキルではなく文章自体の論理性で意思決定する[^working-backwards]。
+  - 顧客が本当に抱えている課題と、新機能がもたらす具体的便益を開発前に証明する[^vogels-2006][^working-backwards-book]。
+  - 曖昧さを許さない散文形式（ナラティブ）で論理の穴や非現実的な前提を炙り出す[^working-backwards-book]。
+  - 会議の冒頭20〜30分を全員で黙読（沈黙の読書）に費やし、プレゼンスキルではなく文章自体の論理性で意思決定する[^working-backwards-book]。
 - **Non-goals**:
   - 詳細な実装アーキテクチャやコード設計の記述（これらは必要に応じて技術設計書で別途扱う）。
   - 単なる社内向けの業務報告書の代替。
 
 ## User-level explanation
 
-PR-FAQ は通常、最大 6 ページの散文（6-Pager）としてまとめられ、以下の3層で構成される[^working-backwards]:
+PR-FAQ は通常、最大 6 ページの散文（6-Pager）としてまとめられ、以下の3層で構成される[^vogels-2006][^working-backwards-book]:
 
 1. **Press Release (1ページ)**:
    製品のリリース当日に顧客向けに発信される架空の公式発表文。
@@ -49,7 +48,7 @@ PR-FAQ は通常、最大 6 ページの散文（6-Pager）としてまとめら
 
 ## Developer-level explanation
 
-PR-FAQ の運用ワークフローと会議文化は独特の規律を持つ[^working-backwards]:
+PR-FAQ の運用ワークフローと会議文化は独特の規律を持つ[^working-backwards-book]:
 
 1. **Working Backwards（逆算執筆）**:
    アイデアが出た瞬間、コードやスライドではなく、まず PR-FAQ を執筆する。1ページにまとまらない（顧客価値を簡潔に語れない）アイデアは、その時点で企画を練り直す。
@@ -60,7 +59,7 @@ PR-FAQ の運用ワークフローと会議文化は独特の規律を持つ[^wo
 
 ## Design rationale
 
-- **プレゼンテーション（PowerPoint）の禁止**: スライド箇条書き（Bullet points）は因果関係を隠蔽しやすく、発表者の話術に意思決定が左右される。散文（ナラティブ）を義務付けることで、論理の飛躍を強制的に排除する[^working-backwards]。
+- **プレゼンテーション（PowerPoint）の禁止**: スライド箇条書き（Bullet points）は因果関係を隠蔽しやすく、発表者の話術に意思決定が左右される。散文（ナラティブ）を義務付けることで、論理の飛躍を強制的に排除する[^working-backwards-book]。
 - **顧客の言葉で語る強制**: プレスリリースという形式をとることで、「内部アーキテクチャの都合」ではなく「顧客から見た価値（[Rust RFC](Rust%20RFC.md) でいう Guide-level / Mental model）」を最優先で定義させる。
 
 ## Trade-offs and limitations
@@ -85,4 +84,5 @@ PR-FAQ の運用ワークフローと会議文化は独特の規律を持つ[^wo
 
 ## References
 
-[^working-backwards]: Colin Bryar, Bill Carr (2021), *Working Backwards: Insights, Stories, and Secrets from Inside Amazon*, St. Martin's Press — Chapter 3: "Working Backwards: The PR/FAQ and Other Tools" & Chapter 4: "Organizing: Autonomous Teams". PR/FAQ の構成、6-Pager の運用、沈黙の読書文化を確認。
+[^vogels-2006]: Werner Vogels (2006-11-01), [Working Backwards](https://www.allthingsdistributed.com/2006/11/working_backwards.html) — All Things Distributed. Amazon CTO による PR/FAQ（Press Release, FAQ, Mockups, User Manual）の役割とプロダクト定義ステップの原典。確認日: 2026-09-09.
+[^working-backwards-book]: Colin Bryar, Bill Carr (2021), *Working Backwards: Insights, Stories, and Secrets from Inside Amazon*, St. Martin's Press — Chapter 3: "Working Backwards: The PR/FAQ and Other Tools". 6-Pager 構成仕様、沈黙の読書文化の記録。

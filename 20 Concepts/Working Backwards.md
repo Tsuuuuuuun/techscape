@@ -1,0 +1,71 @@
+---
+aliases:
+  - ワーキング・バックワーズ
+  - 顧客からの逆算
+---
+# Working Backwards
+
+## Definition
+
+プロダクトやサービスの開発において、自社の既存技術・能力・思いつきから出発するのではなく、顧客が直面している課題と理想の体験（ゴール地点）を最初に定義し、そこから逆算して必要な製品要件、アーキテクチャ、技術開発、組織体制を導出する開発原則およびメンタルモデル[^vogels-2006][^working-backwards-book]。Amazon のイノベーション手法として体系化された。
+
+## Purpose
+
+- **「誰も欲しがらない機能」の乱造防止**: 自社都合や技術的好奇心から開発を始める順方向アプローチ（Working Forwards）を遮断し、顧客が対価を払う価値があるものだけに投資を集中させる[^working-backwards-book]。
+- **手持ちの技術的制約の打破**: 「今自分たちにできること」の範囲にとどまらず、顧客にとって真に必要な理想体験から逆算することで、必要な新技術の発明や外部調達を強力に動機づける[^working-backwards-book]。
+- **コア便益の極限までの純化**: 「あれもこれも」と機能を詰め込むスコープクリープを防ぎ、顧客がその製品を選ぶたった一つの決定的な理由（Core benefit）を研ぎ澄ます[^working-backwards-book]。
+
+## Mechanism
+
+Working Backwards は、以下の3つの柱によって実践される[^vogels-2006][^working-backwards-book]:
+
+### 1. 5つの問い（5 Customer Questions）
+アイデアを具現化する前に、企画チームは以下の問いに対する検証可能な答えを出さなければならない[^working-backwards-book]:
+1. **誰が顧客か？ (Who is the customer?)**: 曖昧な「全ユーザー」ではなく、具体的なペルソナと文脈の特定。
+2. **顧客の課題や機会は何か？ (What is the customer problem or opportunity?)**: 顧客が現在何に不満を感じ、何に困っているか。
+3. **最も重要な顧客便益は何か？ (What is the most important customer benefit?)**: 顧客が財布を開く決定的なベネフィット。
+4. **顧客がそれを求めていると、なぜ分かるのか？ (How do you know what the customer needs or wants?)**: データや定性調査に基づく客観的証拠。
+5. **顧客体験はどのようなものか？ (What does the customer experience look like?)**: 発見から利用、感動に至る具体的なエンドツーエンドの体験。
+
+### 2. 成果物の先行固定（Artifact-first）
+抽象的な口頭議論やスライドによるごまかしを排除するため、「完成日に顧客が目にする成果物（プレスリリース、顧客向けFAQ、初期UIモック）」を実装着手前に完全な散文（ナラティブ）で書き起こし、検証の土台とする[^vogels-2006][^working-backwards-book]。
+
+### 3. 逆算による技術調達・発明（Invent and Wander）
+理想の顧客体験が固定されたら、現在の技術スタックとのギャップを特定し、「この体験を実現するために今どんな技術・インフラを作らなければならないか」を逆算してエンジニアリングの要件へ落とし込む[^working-backwards-book]。
+
+## Example
+
+- **Kindle の開発**:
+  「世界中のあらゆる本を、パソコンに繋がず、60秒以内に手元で読めるようにする」というプレスリリースの約束から逆算。当時一般的だった Wi-Fi 設定の手間を嫌い、ユーザー設定不要の無料携帯通信網（Whispernet）を端末に組み込むという異例のハードウェア・通信契約を開発した[^working-backwards-book]。
+- **AWS の誕生**:
+  「個人開発者であっても、巨大企業と同じ堅牢なインフラを初期費用ゼロ・クレジットカード1枚の従量課金で即座に扱える世界」から逆算し、社内データセンターの自動プロビジョニング API（S3, EC2）群を発明した[^working-backwards-book]。
+- **ソフトウェア工学との相同性**:
+  - **テスト駆動開発 (TDD)**: 実装コードを書く前に「合格すべきテスト（期待される振る舞い）」を先に定義する。
+  - **[Rust RFC](../30%20Technologies/Rust%20RFC.md) の Guide-level first**: 内部アーキテクチャ（Reference）の前に、利用者が目にするメンタルモデルと構文（Guide）を先に確定させる。
+
+## Properties and limits
+
+- **成立条件**:
+  - 顧客課題に関する一次情報（定性インタビュー、定量ログ）へのアクセスがあること。
+  - チームが「顧客視点の平易な文章」で物事を定義できる言語化能力を持つこと。
+  - プレスリリースのドラフトを何十回も書き直す推敲の規律があること。
+- **限界と適用限界**:
+  - **純粋な基礎研究・セレンディピティには馴染まない**: 顧客自身が想像もつかない根本的な新アルゴリズムやハードウェア技術の研究は、課題からの逆算だけでは生まれにくい。
+  - **実現可能性（Feasibility）の無視リスク**: 顧客の理想を語るあまり、物理法則や経済合理性を無視した「絵に描いた餅」に陥る危険がある（そのため技術的な実現性を問う Internal FAQ による批判的検証が不可欠となる）。
+
+## Relations
+
+- 具現化する文書仕様・運用技術 (Technology):
+  - [PR-FAQ](../30%20Technologies/PR-FAQ.md) — Working Backwards を実行するために Amazon で標準化された 6-Pager 形式の文書フォーマットおよび会議文化。
+- 関連する設計・意思決定概念 (Concept):
+  - [RFC Process](RFC%20Process.md) — 仕様変更・設計案を事前に公開して非同期に合意形成するプロセス。
+  - [ADR](ADR.md) — 決定した経緯とトレードオフをコードと同居させて永続化する手法。
+
+## Open questions
+
+- B2B の受託開発やプラットフォーム基盤チームにおいて、真の「顧客（内部開発者）」に対する Working Backwards を形骸化させずに運用するための実践知。
+
+## References
+
+[^vogels-2006]: Werner Vogels (2006-11-01), [Working Backwards](https://www.allthingsdistributed.com/2006/11/working_backwards.html) — All Things Distributed. Amazon CTO による Working Backwards（Press Release → FAQ → Customer Experience → User Manual）プロセスの原典解説。確認日: 2026-09-09.
+[^working-backwards-book]: Colin Bryar, Bill Carr (2021), *Working Backwards: Insights, Stories, and Secrets from Inside Amazon*, St. Martin's Press — 元幹部による詳細解説。5つの問い（5 Customer Questions）、Kindle/AWS の開発事例、推敲プロセスの実態。

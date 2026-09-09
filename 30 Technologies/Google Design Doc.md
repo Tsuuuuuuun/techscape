@@ -80,4 +80,4 @@ Design Doc は「作成・公開・レビュー・承認」という明確なワ
 
 ## References
 
-[^swe-google]: Titus Winters, Tom Manshreck, Hyrum Wright (2020), *Software Engineering at Google*, O'Reilly Media — Chapter 10: "Documentation" & Chapter 1: "What Is Software Engineering?". Google における Design Doc の目的、構成要素、文化的位置づけを確認。
+[^swe-google]: Titus Winters, Tom Manshreck, Hyrum Wright (2020), [Software Engineering at Google - Chapter 10: Documentation](https://abseil.io/resources/swe-book/html/ch10.html), O'Reilly Media / Abseil. Google における Design Doc の目的、構成要素（Goals/Non-goals, Alternatives）、文化的位置づけを確認。確認日: 2026-09-09.
