@@ -6,7 +6,7 @@ aliases:
 
 ## Summary
 
-Rust プロジェクトにおいて、言語仕様、標準ライブラリ、ツールチェーン（Cargo 等）、コンパイラ内部、またはプロジェクト運営方針に対する重要または破壊的な変更（substantial changes）を提案・議論・合意形成するための公開仕様策定プロセスおよび文書テンプレート[^template]。
+Rust プロジェクトにおいて、言語仕様、標準ライブラリ、ツールチェーン（Cargo 等）、コンパイラ内部、またはプロジェクト運営方針に対する重要または破壊的な変更（substantial changes）を提案・議論・合意形成するための、[RFC Process](../20%20Concepts/RFC%20Process.md) に基づく公開仕様策定プロセスおよび文書テンプレート[^template]。
 
 ## Motivation
 
