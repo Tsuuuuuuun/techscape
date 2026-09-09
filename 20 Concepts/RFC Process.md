@@ -14,6 +14,7 @@ aliases:
 - **実装コストの浪費防止**: 実装完了後に設計の根本的欠陥や不整合が発覚して手戻りが発生するのを防ぎ、事前合意を形成する。
 - **設計空間と代替案の透明化**: なぜその設計が選ばれ、どのような代替案が不採用になったのか（Why）を将来にわたって検証可能な形で記録する。
 - **分散コミュニティの非同期合意形成**: 地理的・時間的に分散した貢献者やステークホルダーが、対等かつオープンに議論に参加できる場を提供する。
+- **言語・設計思想のレンズ（Why と Why not の理解）**: 公式ドキュメントが「決定事項（What）」を提示するのに対し、RFC は「なぜその設計に至り、何を犠牲にしたのか（Why と Why not）」を記録する。また、各コミュニティの「RFC テンプレートの型（何を強制して書かせるか）」自体が、その言語が最も尊ぶ価値観と最も恐れるリスクを直接映し出す。
 
 ## Mechanism
 
@@ -34,7 +35,13 @@ aliases:
 ## Example
 
 - **ARPANET / IETF RFC**: 1969年に Steve Crocker が提案した技術メモが起源。完成した規格の通達ではなく、「コメントを求める（Request for Comments）」という非権威的・協調的な草案共有として始まった[^rfc3][^rfc1000]。
-- **言語・OSS プロジェクトへの展開**: Python の [PEP](../30%20Technologies/PEP.md)[^pep1] や [Rust RFC](../30%20Technologies/Rust%20RFC.md)、Swift Evolution、React RFC など、現代の大規模 OSS の多くが自プロジェクトの意思決定機構として導入している。また、企業のエンジニアリング組織における Design Doc や提案制度としても応用されている。
+- **言語・OSS プロジェクトへの展開**:
+  現代の大規模 OSS の多くが自プロジェクトの意思決定機構として導入しているが、対象とする領域によって重視する論点が派生・特化している：
+  - **[PEP](../30%20Technologies/PEP.md)** (Python): 提案者の推進責任（Champion）と、後方互換性（Backwards Compatibility）の厳格な事前提示。
+  - **[Rust RFC](../30%20Technologies/Rust%20RFC.md)**: 教育メンタルモデル（Guide）と実装（Reference）の分離、および「あえて採用しない理由（Drawbacks）」の自己批判。
+  - **React RFC**: Rust RFC の直系。UI ライブラリ特有の「導入・移行戦略（Adoption strategy）」、自動移行ツール（Codemod）、段階的オプトインの実現性を重視。
+  - **Swift Evolution**: Rust/PEP を融合。OS 組み込み言語としての「バイナリ互換性（Effect on ABI stability）」および将来の変更容易性（Effect on API resilience）の審査を義務付け。
+  - **Go Proposal**: 最初から長文 RFC を書かせず、まず短い GitHub Issue で週次トリアージ（即時 Accept / Decline）を行い、大規模・複雑な案件のみ Design Doc を要求する「Issue ファースト」の軽量方式。
 
 ## Properties and limits
 
@@ -66,8 +73,12 @@ aliases:
 
 ## Relations
 
+- 対をなす事後記録概念 (Concept):
+  - [ADR](ADR.md) — アーキテクチャ決定をコードリポジトリ内で軽量・不変に記録する手法（Context → Decision → Consequences）。RFC Process（事前合意）と事後記録の両輪をなす。
 - 下位の具体的実装 (Technology):
+  - [Google Design Doc](../30%20Technologies/Google%20Design%20Doc.md) — Google における実装前技術設計書の標準化（Goals/Non-goals、横断的関心事、Alternatives）。
   - [PEP](../30%20Technologies/PEP.md) — Python における提案・仕様策定プロセスの具現化（Standards Track / Informational / Process の分類、Discourse 議論、Steering Council による採否判定）。
+  - [PR-FAQ](../30%20Technologies/PR-FAQ.md) — Amazon における Working Backwards（顧客視点の模擬プレスリリースと社内外 FAQ）によるプロダクト提案。
   - [Rust RFC](../30%20Technologies/Rust%20RFC.md) — Rust 言語およびエコシステムにおける RFC プロセスの具現化（GitHub PR、サブチーム、FCP、Nightly feature gate 等による制度設計）。
 - 関連する問題・問い (Issue 候補):
   - 分散コミュニティにおいてどのように技術的意思決定と仕様合意を行うべきか（How should distributed communities make technical decisions?）
