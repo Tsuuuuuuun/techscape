@@ -60,6 +60,12 @@ RFC プロセスは GitHub 上のプルリクエストと Issue を連携させ�
 - **費用・限界**:
   - 合意形成までに多大な時間と議論コストを要する。
   - RFC が受理されても、実装者リソースが確保できず放置される（tracking issue が長期滞留する）ケースがある。
+  - **後方互換性・移行議論の構造的欠落**: テンプレートに [PEP](PEP.md) のような独立した「Backwards Compatibility」セクションが存在しない。破壊的変更は言語全体の Edition 機構や 1.0 安定性保証に委ねられているため、型推論の曖昧化や構文競合といった既存エコシステムへの微細な影響や移行パスの精査が、提案者の自発性に依存しやすい。
+
+## Alternatives
+
+- **[PEP](PEP.md) (Python Enhancement Proposals)**:
+  後方互換性（Backwards Compatibility）を必須独立項目として厳格に審査する一方、提案自体の不採用理由（Drawbacks）を直接書かせる独立節は持たず、他案の却下理由（Rejected Ideas）の記録に重きを置く。
 
 ## Mental model
 

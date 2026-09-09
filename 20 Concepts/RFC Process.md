@@ -21,6 +21,9 @@ aliases:
 
 1. **標準化された提案テンプレート**:
    単なるアイデア表明にとどまらず、動機（Motivation）、具体的な仕様（Specification）、代替案（Alternatives / Prior art）、未解決課題（Unresolved questions）などの必須記述項目を定め、提案者に多角的な考察を促す[^pep1]。
+   特に各エコシステムごとにテンプレートの構造的誘導（バイアス）が異なる：
+   - **自己批判の強制 (Drawbacks)**: [Rust RFC](../30%20Technologies/Rust%20RFC.md) のように「採用すべきでない理由」を独立項目として書かせることで、提案の過剰追加（feature creep）を抑止する。
+   - **エコシステム移行・影響評価 (Backwards Compatibility)**: [PEP](../30%20Technologies/PEP.md) のように既存コードへの破壊的影響と移行措置の提示を必須化し、コミュニティ分断や破壊的変更のリスクを未然に防ぐ。
 2. **公開レビュー期間**:
    Issue トラッカー、プルリクエスト、メーリングリスト等を通じて、コミュニティやレビュー担当者からのフィードバックを非同期に受け付ける。
 3. **合意形成（Consensus）と収束基準**:
@@ -31,7 +34,7 @@ aliases:
 ## Example
 
 - **ARPANET / IETF RFC**: 1969年に Steve Crocker が提案した技術メモが起源。完成した規格の通達ではなく、「コメントを求める（Request for Comments）」という非権威的・協調的な草案共有として始まった[^rfc3][^rfc1000]。
-- **言語・OSS プロジェクトへの展開**: Python の PEP（Python Enhancement Proposals）[^pep1] や [Rust RFC](../30%20Technologies/Rust%20RFC.md)、Swift Evolution、React RFC など、現代の大規模 OSS の多くが自プロジェクトの意思決定機構として導入している。また、企業のエンジニアリング組織における Design Doc や提案制度としても応用されている。
+- **言語・OSS プロジェクトへの展開**: Python の [PEP](../30%20Technologies/PEP.md)[^pep1] や [Rust RFC](../30%20Technologies/Rust%20RFC.md)、Swift Evolution、React RFC など、現代の大規模 OSS の多くが自プロジェクトの意思決定機構として導入している。また、企業のエンジニアリング組織における Design Doc や提案制度としても応用されている。
 
 ## Properties and limits
 
@@ -45,9 +48,26 @@ aliases:
   - 「全員一致（100% の賛成）が必要」という誤解。実際には合理的な反論が出尽くしたか、未解決事項を将来のフェーズに切り出せるかを見極めて前進させる運用が多い。
   - 「RFC は拘束力を持つ完全な仕様書である」という誤解。初期 RFC は方針合意であり、試作実装（プロトタイプや Nightly 実装）からのフィードバックによって改訂されることが前提となる。
 
+### アプリケーション開発への適用と製品フェーズによる重み付け
+
+言語や基盤 OSS ではなく、一般的な業務・Web アプリケーション開発に RFC（Design Doc）を適用する場合、システムのライフサイクルによって Rust RFC 型と PEP 型のどちらに比重を置くべきかが変化する：
+
+- **PoC / パイロット期（探索・立ち上げフェーズ） → [Rust RFC](../30%20Technologies/Rust%20RFC.md) 型が優位**:
+  - **最大のリスク**: 仕様の過剰追加（Feature creep）、不可逆な複雑化、利用者の認知負荷の増大。
+  - **効く仕組み**: `Guide-level explanation`（ユーザーのメンタルモデルの単純さの検証）と `Drawbacks`（「あえて今これを追加しない理由」「複雑化のコスト」を自白させること）を課すことで、YAGNI（不要な作り込み）を抑止できる。
+- **本番運用・リリース後（成熟・運用フェーズ） → [PEP](../30%20Technologies/PEP.md) 型が優位**:
+  - **最大のリスク**: 稼働中クライアントや保存データのサイレント破損、移行不能による障害。
+  - **効く仕組み**: `Backwards Compatibility`（互換性影響の重大度、非推奨化期間、移行パス）を独立必須項目として審査することで、安全なマイグレーションを保証する。
+- **Rust RFC 形式における後方互換性の収容パターン**:
+  Rust RFC の構成をベースに運用する場合でも、後方互換性の議論は以下のように各セクションへ分散して収容できる：
+  - **互換性破壊のリスク・不採用理由**: `Drawbacks` に記述（例: 既存 API や DB レコードとの互換性維持が不確実である点）。
+  - **破壊を受け入れる妥当性と別案の検討**: `Rationale and alternatives` に記述（なぜ互換性を壊してでも新設計を選ぶのか、互換レイヤーを挟む別案がなぜ劣るのか）。
+  - **移行手順・ワークアラウンドの詳細**: `Reference-level explanation`（内部の段階的移行・フォールバック実装）および `Guide-level explanation`（開発者・利用者のコード書き換えガイド）に記述。
+
 ## Relations
 
 - 下位の具体的実装 (Technology):
+  - [PEP](../30%20Technologies/PEP.md) — Python における提案・仕様策定プロセスの具現化（Standards Track / Informational / Process の分類、Discourse 議論、Steering Council による採否判定）。
   - [Rust RFC](../30%20Technologies/Rust%20RFC.md) — Rust 言語およびエコシステムにおける RFC プロセスの具現化（GitHub PR、サブチーム、FCP、Nightly feature gate 等による制度設計）。
 - 関連する問題・問い (Issue 候補):
   - 分散コミュニティにおいてどのように技術的意思決定と仕様合意を行うべきか（How should distributed communities make technical decisions?）
